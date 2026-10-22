@@ -32,16 +32,27 @@ def exact_row(df, dataset):
     return ex.iloc[-1] if len(ex) else None
 
 
+def operating_point(p2, dataset, index, target):
+    """Fastest tune point reaching target, else the most accurate tune point.
+
+    Returns (test row of that config, reached) or (None, False) if not benchmarked.
+    """
+    sub = p2[(p2.dataset == dataset) & (p2["index"] == index)]
+    tune = sub[sub.query_split == "tune"]
+    if tune.empty:
+        return None, False
+    ok = tune[tune.recall >= target]
+    reached = not ok.empty
+    pick = ok.loc[ok.qps.idxmax()] if reached else tune.loc[tune.recall.idxmax()]
+    test = sub[(sub.query_split == "test") & (sub.build_params == pick.build_params)
+               & (sub.search_param == pick.search_param)]
+    return test.iloc[0], reached
+
+
 def choose(p2, dataset, index, target):
     """Fastest tune point reaching target -> matching test row (or None)."""
-    tune = p2[(p2.dataset == dataset) & (p2["index"] == index) & (p2.query_split == "tune")]
-    ok = tune[tune.recall >= target]
-    if ok.empty:
-        return None
-    pick = ok.loc[ok.qps.idxmax()]
-    test = p2[(p2.dataset == dataset) & (p2["index"] == index) & (p2.query_split == "test")
-              & (p2.build_params == pick.build_params) & (p2.search_param == pick.search_param)]
-    return test.iloc[0]
+    r, reached = operating_point(p2, dataset, index, target)
+    return r if reached else None
 
 
 def plot_dataset(p2, ex, dataset, path):
@@ -96,14 +107,9 @@ def tables(p2, df, datasets):
                     row[f"config@{t:.2f}"] = fmt_cfg(r)
             qps_rows.append(row)
 
-            r = choose(p2, ds, index, 0.95)
-            note = ""
-            if r is None:  # report the most accurate config instead
-                tune = sub[sub.query_split == "tune"]
-                pick = tune.loc[tune.recall.idxmax()]
-                r = sub[(sub.query_split == "test") & (sub.build_params == pick.build_params)
-                        & (sub.search_param == pick.search_param)].iloc[0]
-                note = f"0.95 not reached; most accurate config (test recall {r.recall:.3f})"
+            r, reached = operating_point(p2, ds, index, 0.95)
+            note = "" if reached else \
+                f"0.95 not reached; most accurate config (test recall {r.recall:.3f})"
             cost_rows.append({"dataset": ds, "index": index, "config": fmt_cfg(r),
                               "build_s": f"{float(r.build_s):.1f}",
                               "index_MB": f"{float(r.index_bytes) / 2**20:.0f}",

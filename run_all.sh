@@ -25,4 +25,6 @@ $PY part1_exact.py $QUICK
 echo "== Part 2: HNSW / IVF-Flat / IVF-PQ"
 $PY part2_bench.py $QUICK
 $PY part2_report.py $QUICK
+echo "== Part 3: query difficulty (GloVe)"
+$PY part3_difficulty.py $QUICK
 echo "done: results in $A3_RESULTS_DIR"

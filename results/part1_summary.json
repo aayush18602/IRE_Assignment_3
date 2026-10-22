@@ -1,0 +1,68 @@
+[
+ {
+  "dataset": "glove",
+  "n": 1183514,
+  "stored_check": {
+   "same_id_set_frac": 0.9999,
+   "stored_recall_mean": 1.0,
+   "stored_recall_min": 1.0,
+   "n_queries_differ": 0
+  },
+  "rows": [
+   {
+    "part": "1",
+    "dataset": "glove",
+    "n": 1183514,
+    "index": "Flat",
+    "build_params": "",
+    "search_param": "",
+    "query_split": "test",
+    "build_s": 0,
+    "index_bytes": 473405600,
+    "bytes_per_vec": 400.0,
+    "n_queries": 1000,
+    "recall": 1.0,
+    "qps": 50.164222049451325,
+    "median_s": 19.934526224969886,
+    "repeat_s": "[19.934526224969886, 20.011564771994017, 19.8329614889808]",
+    "notes": "single-query 1 thread"
+   },
+   {
+    "part": "1",
+    "dataset": "glove",
+    "n": 1183514,
+    "index": "Flat",
+    "build_params": "",
+    "search_param": "",
+    "query_split": "test",
+    "build_s": 0,
+    "index_bytes": 473405600,
+    "bytes_per_vec": 400.0,
+    "n_queries": 5000,
+    "recall": 1.0,
+    "qps": 156.50866704862347,
+    "median_s": 31.94711254199501,
+    "repeat_s": "[32.02503192098811, 31.94701135100331, 31.94711254199501]",
+    "notes": "batch 1 thread(s)"
+   },
+   {
+    "part": "1",
+    "dataset": "glove",
+    "n": 1183514,
+    "index": "Flat",
+    "build_params": "",
+    "search_param": "",
+    "query_split": "test",
+    "build_s": 0,
+    "index_bytes": 473405600,
+    "bytes_per_vec": 400.0,
+    "n_queries": 5000,
+    "recall": 1.0,
+    "qps": 664.8145116949838,
+    "median_s": 7.52089479402639,
+    "repeat_s": "[5.843247568001971, 7.52089479402639, 8.06638329004636]",
+    "notes": "batch 24 thread(s)"
+   }
+  ]
+ }
+]
