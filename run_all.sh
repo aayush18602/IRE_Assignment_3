@@ -17,6 +17,22 @@ fi
 mkdir -p "$A3_RESULTS_DIR/figures"
 rm -f "$A3_RESULTS_DIR/results.csv"
 
+echo "== environment"
+$PY - > "$A3_RESULTS_DIR/environment.txt" <<'EOF'
+import datetime, os, platform
+import faiss, h5py, matplotlib, numpy, pandas
+cpu = next((l.split(":", 1)[1].strip() for l in open("/proc/cpuinfo") if l.startswith("model name")), "?")
+mem = next((l.split()[1] for l in open("/proc/meminfo") if l.startswith("MemTotal")), "0")
+print(f"date: {datetime.datetime.now().isoformat(timespec='seconds')}")
+print(f"cpu: {cpu} ({os.cpu_count()} logical cores)")
+print(f"ram: {int(mem) / 2**20:.1f} GiB")
+print(f"os: {platform.platform()}")
+print(f"python: {platform.python_version()}")
+for m in (faiss, numpy, h5py, pandas, matplotlib):
+    print(f"{m.__name__}: {m.__version__}")
+EOF
+cat "$A3_RESULTS_DIR/environment.txt"
+
 echo "== tests"
 $PY -m pytest -q tests
 

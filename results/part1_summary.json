@@ -1,5 +1,71 @@
 [
  {
+  "dataset": "sift",
+  "n": 1000000,
+  "stored_check": {
+   "same_id_set_frac": 0.9935,
+   "stored_recall_mean": 1.0,
+   "stored_recall_min": 1.0,
+   "n_queries_differ": 0
+  },
+  "rows": [
+   {
+    "part": "1",
+    "dataset": "sift",
+    "n": 1000000,
+    "index": "Flat",
+    "build_params": "",
+    "search_param": "",
+    "query_split": "test",
+    "build_s": 0,
+    "index_bytes": 512000000,
+    "bytes_per_vec": 512.0,
+    "n_queries": 1000,
+    "recall": 1.0,
+    "qps": 42.014327796328054,
+    "median_s": 23.801404245896265,
+    "repeat_s": "[23.801404245896265, 25.061209932086058, 22.378600870026276]",
+    "notes": "single-query 1 thread"
+   },
+   {
+    "part": "1",
+    "dataset": "sift",
+    "n": 1000000,
+    "index": "Flat",
+    "build_params": "",
+    "search_param": "",
+    "query_split": "test",
+    "build_s": 0,
+    "index_bytes": 512000000,
+    "bytes_per_vec": 512.0,
+    "n_queries": 5000,
+    "recall": 1.0,
+    "qps": 147.9096730534992,
+    "median_s": 33.80441520002205,
+    "repeat_s": "[33.607414033962414, 33.80441520002205, 33.868362731067464]",
+    "notes": "batch 1 thread(s)"
+   },
+   {
+    "part": "1",
+    "dataset": "sift",
+    "n": 1000000,
+    "index": "Flat",
+    "build_params": "",
+    "search_param": "",
+    "query_split": "test",
+    "build_s": 0,
+    "index_bytes": 512000000,
+    "bytes_per_vec": 512.0,
+    "n_queries": 5000,
+    "recall": 1.0,
+    "qps": 689.5418136444883,
+    "median_s": 7.251191879971884,
+    "repeat_s": "[5.923554684966803, 7.251191879971884, 7.610625187982805]",
+    "notes": "batch 24 thread(s)"
+   }
+  ]
+ },
+ {
   "dataset": "glove",
   "n": 1183514,
   "stored_check": {
@@ -22,9 +88,9 @@
     "bytes_per_vec": 400.0,
     "n_queries": 1000,
     "recall": 1.0,
-    "qps": 50.164222049451325,
-    "median_s": 19.934526224969886,
-    "repeat_s": "[19.934526224969886, 20.011564771994017, 19.8329614889808]",
+    "qps": 50.22327931281572,
+    "median_s": 19.911085330997594,
+    "repeat_s": "[19.911085330997594, 19.936955682002008, 19.87497802602593]",
     "notes": "single-query 1 thread"
    },
    {
@@ -40,9 +106,9 @@
     "bytes_per_vec": 400.0,
     "n_queries": 5000,
     "recall": 1.0,
-    "qps": 156.50866704862347,
-    "median_s": 31.94711254199501,
-    "repeat_s": "[32.02503192098811, 31.94701135100331, 31.94711254199501]",
+    "qps": 155.12239344491607,
+    "median_s": 32.23261251300573,
+    "repeat_s": "[32.23261251300573, 32.16072659695055, 32.365456214989536]",
     "notes": "batch 1 thread(s)"
    },
    {
@@ -58,9 +124,9 @@
     "bytes_per_vec": 400.0,
     "n_queries": 5000,
     "recall": 1.0,
-    "qps": 664.8145116949838,
-    "median_s": 7.52089479402639,
-    "repeat_s": "[5.843247568001971, 7.52089479402639, 8.06638329004636]",
+    "qps": 502.4733889765618,
+    "median_s": 9.950775722041726,
+    "repeat_s": "[16.00425498804543, 9.950775722041726, 8.686467551975511]",
     "notes": "batch 24 thread(s)"
    }
   ]
