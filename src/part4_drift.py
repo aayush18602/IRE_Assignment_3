@@ -131,6 +131,8 @@ def main():
                 rec_fix = float(recall_at_k(ids, gt_test, dd.test, base).mean())
                 work_fix = work_per_query(index, kind, dd.test, v_fix)
                 op = pick(pts, TARGET)
+                if op:
+                    set_search(inner(index), kind, op["value"])
                 imb = float(inner(index).invlists.imbalance_factor()) if kind == "IVF-Flat" else np.nan
                 s = {"delta": delta, "index": kind, "variant": variant,
                      "fixed_param": f"{pname[kind]}={v_fix}", "recall_fixed": rec_fix,
