@@ -6,6 +6,7 @@ set -euo pipefail
 cd "$(dirname "$0")"
 
 PY=${PYTHON:-python3}
+[[ "$PY" == */* ]] && PY=$(realpath -s "$PY")   # a relative path must survive the cd below
 QUICK=""
 if [[ "${1:-}" == "--quick" ]]; then
     QUICK="--quick"
@@ -27,4 +28,6 @@ $PY part2_bench.py $QUICK
 $PY part2_report.py $QUICK
 echo "== Part 3: query difficulty (GloVe)"
 $PY part3_difficulty.py $QUICK
+echo "== Part 4: drift on generated data"
+$PY part4_drift.py $QUICK
 echo "done: results in $A3_RESULTS_DIR"

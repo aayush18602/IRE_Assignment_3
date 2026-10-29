@@ -63,5 +63,9 @@ Outputs:
 | `src/indexes.py` | index builders and search-parameter setters |
 | `src/part1_exact.py` | exact baseline, ground-truth check, single vs batch timing |
 | `src/part2_bench.py`, `src/part2_report.py` | index sweeps; plots and tables |
-| `tests/` | unit tests for recall |
+| `src/part3_difficulty.py` | Part 3: recall and latency per relative-contrast quartile (GloVe) |
+| `src/gen_synthetic.py` | Part 4 seeded data generator (Gaussian mixture + shift δ) |
+| `src/part4_drift.py` | Part 4: IVF-Flat and HNSW under drift, inserted vs rebuilt |
+| `src/plots.py`, `src/results.py` | shared plot style; results.csv writer |
+| `tests/` | unit tests for recall and the generator |
 | `hypothesis.md` | Part 3 and Part 4 hypotheses (committed before each experiment) |
